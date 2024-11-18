@@ -33,38 +33,108 @@
     <!-- @master css -->
     <link rel="stylesheet" href="/assets/css/style.min.css?ver=1.0">
 
-    <!-- @fonts -->
-    <link rel="stylesheet" href="/assets/fonts/fonts.css?ver=1.0">
+    <!-- @adobe fonts -->
+    <script>
+        (function (d) {
+            var config = {
+                kitId: 'net6zje',
+                scriptTimeout: 3000,
+                async: true
+            },
+                h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+        })(document);
+    </script>
 
-    <title>Home Page</title>
+    <title>Motouse</title>
 </head>
 
 <body>
-    <!-- @header -->
-    <header class="c-header">
-        <div class="c-header_container"></div>
-    </header>
-    <!-- @@header -->
-
-    <!-- @main -->
-    <main class="homepage">
-        <!-- top// -->
-        <section class="top">
-            <div class="top_container">
-                <h2>have a nice day!!</h2>
+    <div class="homepage">
+        <!-- @loading -->
+        <div class="c-loading" data-loading>
+            <div class="c-loading_container">
+                <div class="c-loading_logo" data-loading-logo>
+                    <img src="/assets/img/logo_black.webp" alt="本巣ヱ" width="74" height="269" draggable="false">
+                </div>
             </div>
-        </section>
-        <!-- //top -->
-    </main>
-    <!-- @@main -->
+        </div>
+        <!-- @@loading -->
 
-    <!-- @footer -->
-    <footer class="c-footer">
-        <div class="c-footer_container"></div>
-    </footer>
-    <!-- @@footer -->
+        <!-- @header -->
+        <header class="c-header">
+            <div class="c-header_container">
+                <div class="c-header_left sp-only" data-header-change>
+                    <p data-menu-toggler>Menu</p>
+                </div>
+
+                <div class="c-header_right" data-header-change data-menu-logo>
+                    <ul class="c-header_nav pc-only">
+                        <li><a href="#about">本巣ヱについて</a></li>
+                        <li><a href="#feature">こだわり</a></li>
+                        <li><a href="#product">商品一覧</a></li>
+                        <li><a href="#store">店舗</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                    <img src="/assets/img/logo_black.webp" alt="本巣ヱ" width="45" height="165" draggable="false">
+                </div>
+
+                <div class="c-header_menu" data-menu>
+                    <ul>
+                        <li><a href="#about" data-menu-link>本巣ヱについて</a></li>
+                        <li><a href="#feature" data-menu-link>こだわり</a></li>
+                        <li><a href="#product" data-menu-link>商品一覧</a></li>
+                        <li><a href="#store" data-menu-link>店舗</a></li>
+                        <li><a href="#contact" data-menu-link>お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- @@header -->
+
+        <!-- @main -->
+        <main>
+            <!-- firstview// -->
+            <section class="fv">
+                <div class="fv_container">
+                    <div class="fv_video" id="fvVideo">
+                    </div>
+                    <div class="fv_overlay"></div>
+
+                    <div class="fv_center">
+                        <img src="/assets/img/logo_white.webp" alt="本巣ヱ" width="74" height="269" draggable="false">
+                    </div>
+
+                    <div class="fv_bottom">
+                        <div class="fv_notice">
+                            <p>お知らせ</p>
+                            <a href="http://" target="_blank" rel="noopener noreferrer">簡易的な一文が入ります簡易的な一文が入ります</a>
+                        </div>
+                        <div class="fv_line">
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- //firstview -->
+
+            <!-- about// -->
+            <section class="about" id="about" data-offsettop>
+                <div class="about_container" style="height: 200vh;"></div>
+            </section>
+            <!-- //about -->
+        </main>
+        <!-- @@main -->
+
+        <!-- @footer -->
+        <footer class="c-footer">
+            <div class="c-footer_container"></div>
+        </footer>
+        <!-- @@footer -->
+    </div>
 
     <!-- @script -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="/assets/js/libs.js"></script>
     <script src="/assets/js/main.js"></script>
 </body>

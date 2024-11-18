@@ -3,4 +3,159 @@
 /* -------------------------------------------------------------------------- */
 
 .homepage {
+  background-image: url(/assets/img/bg-noise.webp);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  // ===== firstview =====
+  .fv {
+    &_container {
+      width: 100%;
+      height: 100vh;
+      height: var(--app-height);
+      overflow: hidden;
+      position: relative;
+    }
+
+    &_video {
+      width: 100%;
+      height: 100%;
+
+      video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        transform: translateX(-50%) translateY(-50%);
+
+        &::-webkit-media-controls,
+        &::-webkit-media-controls-play-button,
+        &::-webkit-media-controls-volume-slider,
+        &::-webkit-media-controls-mute-button,
+        &::-webkit-media-controls-timeline,
+        &::-webkit-media-controls-current-time-display {
+          display: none;
+        }
+      }
+    }
+
+    &_overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+
+    &_center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+
+      img {
+        width: 74px;
+        height: auto;
+        object-fit: contain;
+      }
+
+      @include maxW(1023px) {
+        img {
+          width: 50px;
+        }
+      }
+    }
+
+    &_bottom {
+      position: absolute;
+      bottom: 45px;
+      width: 100%;
+      padding: 0 57px 0 45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 45px;
+
+      @include maxW(1023px) {
+        bottom: 22px;
+        padding: 0 22px;
+      }
+    }
+
+    &_notice {
+      flex: 1;
+
+      color: $white-cl;
+      font-size: 1.4rem;
+      letter-spacing: 0.28px;
+      line-height: 1.57;
+
+      a {
+        margin-top: 5px;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
+
+      @include maxW(1023px) {
+        font-size: 1.3rem;
+        letter-spacing: 0.26px;
+        line-height: 1.62;
+      }
+    }
+
+    &_line {
+      display: block;
+      height: 60px;
+      width: 1px;
+      background-color: rgb(255 255 255 / 0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+
+      span {
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 0%;
+        animation: 3s infinite scroll-down-vertical;
+        background-color: #fff;
+      }
+
+      @include maxW(1023px) {
+        height: 45px;
+      }
+
+      @keyframes scroll-down-vertical {
+        0% {
+          height: 0;
+          top: 0;
+        }
+        30% {
+          height: 100%;
+          top: 0;
+        }
+        100%,
+        60% {
+          height: 100%;
+          top: 100%;
+        }
+      }
+    }
+  }
 }
