@@ -2,6 +2,7 @@
 
 // ===== init =====
 const init = () => {
+  history.scrollRestoration = "manual";
   // # app-height
   appHeight();
   // # init video
