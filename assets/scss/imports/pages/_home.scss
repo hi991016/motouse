@@ -337,9 +337,11 @@
       }
 
       .swiper-button-next {
-        top: 10px;
+        top: 25px;
         left: 0;
         right: auto;
+        width: 25px;
+        height: auto;
       }
 
       .swiper-button-next:after,
@@ -360,7 +362,7 @@
         .swiper-button-next {
           top: auto;
           left: auto;
-          bottom: -15px;
+          bottom: 2px;
           right: 0;
 
           svg {
