@@ -83,7 +83,7 @@ const initLoading = function () {
     loading.classList.add("is-done");
     setTimeout(() => {
       lenis.start();
-    }, 700);
+    }, 800);
   }, 3000);
 };
 
@@ -148,6 +148,68 @@ $(window).on("pageshow scroll", function () {
     ? $("[data-header-change]").addClass("is-top")
     : $("[data-header-change]").removeClass("is-top");
 });
+
+// ### Scroll Secion
+const scrollNav = document.querySelectorAll("[data-scrollto]");
+// scroll nav function on click
+scrollNav.forEach((item) => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault(); // prevent a tag to change url
+
+    // scroll function
+    let currentData = item.getAttribute("data-scrollto");
+    let currentSection = document.getElementById(currentData);
+    if (currentSection) {
+      window.scrollTo(
+        0,
+        currentSection.getBoundingClientRect().top + window.scrollY
+      );
+    }
+  });
+});
+
+// ===== handle tab change =====
+let numberIndex = 0;
+$(window).on("load resize", function () {
+  handleTabChange($(".store_nav li.active"));
+});
+
+function handleTabChange(tab) {
+  $(".store_nav .indicator").css({
+    width: tab.outerWidth(),
+    left: tab.position() ? tab.position().left : 0,
+  });
+  tab = tab + 1;
+}
+
+$(document).on("click", ".store_nav li", function () {
+  numberIndex = $(this).index();
+
+  if (!$(this).is("active")) {
+    $(".store_nav li").removeClass("active");
+    $(".store_content").removeClass("active");
+    // tab
+    $(this).addClass("active");
+    handleTabChange($(this));
+    // content
+    $(".store_content:eq(" + numberIndex + ")").addClass("active");
+  }
+});
+
+// ===== accordion =====
+const accordion = document.getElementsByClassName("js-collapse");
+const panel = document.getElementsByClassName("js-panel");
+
+for (let i = 0; i < accordion.length; i++) {
+  accordion[i].addEventListener("click", function () {
+    this.classList.toggle("open");
+    if (panel[i].style.maxHeight) {
+      panel[i].style.maxHeight = null;
+    } else {
+      panel[i].style.maxHeight = panel[i].scrollHeight + "px";
+    }
+  });
+}
 
 // ===== lazy loading =====
 const ll = new LazyLoad({

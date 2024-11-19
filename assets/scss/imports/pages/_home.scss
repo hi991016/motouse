@@ -16,7 +16,7 @@
   // ===== firstview =====
   .fv {
     &_container {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       height: var(--app-height);
       overflow: hidden;
@@ -318,6 +318,7 @@
 
       .swiper-pagination-bullet {
         font-size: 1.8rem;
+        font-weight: 300;
         opacity: 0.3;
         background: none;
         margin: 0 15px 0 0;
@@ -423,6 +424,332 @@
   .product {
     &_container {
       padding-top: 200px;
+
+      @include maxW(1023px) {
+        padding-top: 147px;
+      }
+    }
+  }
+
+  // ===== store =====
+  .store {
+    &_container {
+      padding: 227px 50px 0;
+
+      @include maxW(1023px) {
+        padding: 147px 22px 0;
+      }
+    }
+
+    &_nav {
+      position: relative;
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        li {
+          font-size: 1.8rem;
+          letter-spacing: 0.72px;
+          line-height: 1.61;
+          text-align: center;
+          padding-bottom: 30px;
+          cursor: pointer;
+          border-bottom: 1px solid #ddd;
+        }
+      }
+
+      .indicator {
+        position: absolute;
+        bottom: 0;
+        min-width: 0;
+        width: 0;
+        height: 1px;
+        background-color: $black-cl;
+        transition: left 0.3s, width 0.3s;
+      }
+
+      @include maxW(1023px) {
+        ul {
+          li {
+            font-size: 1.5rem;
+            letter-spacing: 0.6px;
+            line-height: 1.53;
+            padding-bottom: 12px;
+          }
+        }
+      }
+    }
+
+    &_tabs {
+      margin-top: 50px;
+
+      @include maxW(1023px) {
+        margin-top: 25px;
+      }
+    }
+
+    &_content {
+      opacity: 0;
+      animation: 1s forwards fadeTab;
+      display: none;
+      visibility: hidden;
+
+      &.active {
+        display: block;
+        visibility: visible;
+      }
+
+      @keyframes fadeTab {
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    }
+
+    &_thumb {
+      img {
+        object-fit: contain;
+      }
+    }
+
+    &_inner {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+      @include maxW(1023px) {
+        margin-top: 20px;
+        display: block;
+      }
+    }
+
+    &_left {
+      p {
+        font-size: 1.6rem;
+        letter-spacing: 0.64px;
+        line-height: 1.61;
+      }
+
+      .instagram {
+        width: max-content;
+        margin-top: 28px;
+      }
+
+      @include maxW(1023px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        p {
+          font-size: 1.4rem;
+          letter-spacing: 0.56px;
+          line-height: 1.55;
+        }
+
+        .instagram {
+          margin-top: initial;
+        }
+      }
+    }
+
+    &_info {
+      h3,
+      th,
+      td {
+        font-size: 1.6rem;
+        line-height: 1.61;
+        letter-spacing: 0.64px;
+        font-weight: 300;
+        vertical-align: top;
+        text-align: left;
+      }
+
+      table {
+        margin-top: 25px;
+
+        td:nth-child(2) {
+          padding: 0 20px;
+        }
+      }
+
+      @include maxW(1023px) {
+        margin-top: 25px;
+
+        h3,
+        td,
+        td {
+          font-size: 1.4rem;
+          letter-spacing: 0.56px;
+          line-height: 1.63;
+        }
+
+        table {
+          margin-top: 15px;
+
+          td:nth-child(2) {
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+
+    &_list {
+      margin-top: 48px;
+
+      @include maxW(1023px) {
+        margin-top: 33px;
+      }
+    }
+
+    &_accordion {
+      position: relative;
+      border-bottom: 1px solid #ddd;
+      transition: 0.3s ease-in-out;
+
+      &:first-child {
+        border-top: 1px solid #ddd;
+      }
+
+      &_btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 30px 0;
+        cursor: pointer;
+
+        .title {
+          width: 90%;
+        }
+
+        .plus {
+          position: absolute;
+          right: 20px;
+
+          svg {
+            transition: 0.3s linear;
+          }
+        }
+
+        &.open .plus svg {
+          transform: rotate(45deg);
+        }
+      }
+
+      &_content {
+        width: 90%;
+        padding-top: 15px;
+        padding-bottom: 45px;
+
+        table {
+          margin-top: 27px;
+
+          td:nth-child(2) {
+            padding: 0 20px 0 30px;
+          }
+        }
+
+        th,
+        td,
+        p {
+          font-size: 1.4rem;
+          font-weight: 300;
+          letter-spacing: 0.56px;
+          line-height: 1.56;
+          font-feature-settings: "palt" 1;
+        }
+
+        .list {
+          margin-top: 30px;
+
+          p {
+            padding-left: 26px;
+            text-indent: -26px;
+            span {
+              padding-right: 12px;
+            }
+          }
+        }
+
+        .notes {
+          margin-top: 28px;
+          font-size: 1.2rem;
+          letter-spacing: 0.48px;
+          line-height: 1.58;
+          opacity: 0.7;
+        }
+      }
+
+      &_panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+      }
+
+      @include maxW(1023px) {
+        &_btn {
+          padding: 20px 0;
+
+          .plus {
+            right: 12px;
+
+            svg {
+              width: 10px;
+              height: auto;
+            }
+          }
+        }
+
+        &_content {
+          th,
+          td,
+          p {
+            font-size: 1.3rem;
+            letter-spacing: 0.52px;
+            line-height: 1.51;
+          }
+
+          .notes {
+            margin-top: 24px;
+            font-size: 1.1rem;
+            letter-spacing: 0.44px;
+          }
+        }
+      }
+    }
+
+    &_group {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+
+      a {
+        background-color: $black-cl;
+        color: $white-cl;
+        width: 100%;
+        height: 60px;
+        font-size: 1.6rem;
+        letter-spacing: 0.64px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @include maxW(1023px) {
+        margin-top: 40px;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 12px;
+
+        a {
+          height: 55px;
+          font-size: 1.4rem;
+          letter-spacing: 0.56px;
+        }
+      }
     }
   }
 }
