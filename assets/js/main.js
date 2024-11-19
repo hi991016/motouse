@@ -9,6 +9,27 @@ const init = () => {
   initVideo();
   // # init loading
   initLoading();
+  // # init swiper feature
+  const swiperFeature = new Swiper("[data-feature-swiper]", {
+    loop: true,
+    speed: 600,
+    effect: "fade",
+    allowTouchMove: false,
+    fadeEffect: {
+      crossFade: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '">' + (index + 1) + "</span>";
+      },
+    },
+  });
 };
 
 // ===== add event on multiple element =====
