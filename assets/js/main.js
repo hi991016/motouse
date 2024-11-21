@@ -217,8 +217,8 @@ let index = 0;
 let swiperProduct;
 const [modalToggler, nextModal, prevModal] = [
   document.querySelectorAll("[data-modal-toggler]"),
-  document.querySelector(".modal-button-next"),
-  document.querySelector(".modal-button-prev"),
+  document.querySelector(".custom-btn-next"),
+  document.querySelector(".custom-btn-prev"),
 ];
 
 const swiperImages = () => {
@@ -241,12 +241,36 @@ const swiperImages = () => {
 swiperImages();
 
 // ## Controls modal
-// prevModal.addEventListener("click", () => {
-//   swiperProduct.slidePrev();
-// });
-// nextModal.addEventListener("click", () => {
-//   swiperProduct.slideNext();
-// });
+prevModal.addEventListener("click", () => {
+  swiperProduct.slideNext();
+});
+nextModal.addEventListener("click", () => {
+  swiperProduct.slidePrev();
+});
+
+// ## build Swiper All
+const buildSwiperSlider = (sliderElm) => {
+  const sliderIdentifier = sliderElm.dataset.modalSwiper;
+  return new Swiper(`[data-modal-swiper="${sliderIdentifier}"]`, {
+    speed: 1000,
+    fadeEffect: { crossFade: true },
+    effect: "fade",
+    slidesPerView: 1,
+    initialSlide: 0,
+    allowTouchMove: false,
+    pagination: {
+      el: `.swiper-pagination-m${sliderIdentifier}`,
+      clickable: true,
+    },
+    autoplay: {
+      delay: 3500,
+      disableOnInteraction: false,
+    },
+    watchSlidesProgress: true,
+    observer: true,
+    observeParents: true,
+  });
+};
 
 // ## Action thumb product
 modalToggler.forEach((item) => item.addEventListener("click", handleZoomImage));
@@ -260,32 +284,9 @@ function handleZoomImage(event) {
   );
   console.log("index", image, index);
   swiperProduct.slideToLoop(index, 0);
-  // ## Init all swiper inside modal
-  const buildSwiperSlider = (sliderElm) => {
-    const sliderIdentifier = sliderElm.dataset.modalSwiper;
-    return new Swiper(`[data-modal-swiper="${sliderIdentifier}"]`, {
-      speed: 1000,
-      fadeEffect: { crossFade: true },
-      effect: "fade",
-      slidesPerView: 1,
-      initialSlide: 0,
-      allowTouchMove: false,
-      pagination: {
-        el: `.swiper-pagination-m${sliderIdentifier}`,
-        clickable: true,
-      },
-      autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-      },
-      watchSlidesProgress: true,
-      observer: true,
-      observeParents: true,
-    });
-  };
-  // Get all of the swipers on the page
+
+  // ## Loop over all of the fetched sliders and apply Swiper on each one.
   const allSliders = document.querySelectorAll("[data-modal-swiper]");
-  // Loop over all of the fetched sliders and apply Swiper on each one.
   allSliders.forEach((slider) => buildSwiperSlider(slider));
 
   // ## Fade in modal
