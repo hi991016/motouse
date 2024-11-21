@@ -477,6 +477,14 @@
     }
 
     &_items {
+      cursor: pointer;
+
+      &:hover {
+        .overlay {
+          opacity: 1;
+        }
+      }
+
       figure {
         display: block;
         z-index: 1;
@@ -484,6 +492,7 @@
         height: 100%;
         padding-bottom: calc(305 / 305 * 100%);
         background-color: #000;
+        pointer-events: none;
 
         img {
           position: absolute;
@@ -509,13 +518,6 @@
       height: 100%;
       cursor: pointer;
       aspect-ratio: 1/1;
-
-      &:hover {
-        .overlay {
-          opacity: 1;
-          pointer-events: auto;
-        }
-      }
 
       .overlay {
         position: absolute;
@@ -981,48 +983,50 @@
           object-fit: cover;
         }
       }
+    }
 
-      .swiper-pagination {
-        bottom: 40px;
-        right: auto;
-        padding: 0 40px;
-        text-align: left;
-        display: flex;
-        gap: 10px;
+    &_pagination {
+      position: absolute;
+      bottom: 40px;
+      right: auto;
+      padding: 0 40px;
+      text-align: left;
+      display: flex;
+      gap: 10px;
+      z-index: 1;
 
-        .swiper-pagination-bullet {
-          width: 30px;
-          height: 1px;
-          border-radius: 0;
-          position: relative;
-          overflow: hidden;
-          background: rgb(255 255 255 / 0.3);
-          opacity: 1;
-          margin: 0;
+      .swiper-pagination-bullet {
+        width: 30px;
+        height: 1px;
+        border-radius: 0;
+        position: relative;
+        overflow: hidden;
+        background: rgb(255 255 255 / 0.3);
+        opacity: 1;
+        margin: 0;
 
-          &:before {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-          }
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
         }
+      }
 
-        .swiper-pagination-bullet-active::before {
-          background: #fff;
-          animation: 6s cubic-bezier(0.3, 0, 0.3, 1) forwards slide-progress;
+      .swiper-pagination-bullet-active::before {
+        background: #fff;
+        animation: 6s cubic-bezier(0.3, 0, 0.3, 1) forwards slide-progress;
+      }
+
+      @keyframes slide-progress {
+        0% {
+          transform: translateX(-100%);
         }
-
-        @keyframes slide-progress {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(0);
-          }
+        100% {
+          transform: translateX(0);
         }
       }
     }

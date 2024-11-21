@@ -31,7 +31,6 @@ const init = () => {
     },
   });
   // # init swiper product
-
 };
 
 // ===== add event on multiple element =====
@@ -59,7 +58,7 @@ const lenis = new Lenis({
   lerp: 0.05,
   smoothWheel: true,
 });
-lenis.on("scroll", (e) => { });
+lenis.on("scroll", (e) => {});
 function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
@@ -216,12 +215,15 @@ for (let i = 0; i < accordion.length; i++) {
 // ===== popup product =====
 let index = 0;
 let swiperProduct;
-
-const lightBox = document.querySelector("[data-modal]");
-const imgLightbox = document.querySelectorAll("[data-modal-toggler]");
+const [modalToggler, nextModal, prevModal] = [
+  document.querySelectorAll("[data-modal-toggler]"),
+  document.querySelector(".c-modal_controls .modal-button-next"),
+  document.querySelector(".c-modal_controls .modal-button-prev"),
+];
 
 const swiperImages = () => {
   swiperProduct = new Swiper("[data-product-swiper]", {
+    init: false,
     loop: true,
     speed: 600,
     fadeEffect: { crossFade: true },
@@ -232,43 +234,68 @@ const swiperImages = () => {
       nextEl: ".modal-button-next",
       prevEl: ".modal-button-prev",
     },
-  })
-}
+    observer: true,
+    observeParents: true,
+  });
+};
 swiperImages();
-imgLightbox.forEach((item) =>
-  item.addEventListener("click", handleZoomImage)
-);
 
+// ## Controls modal
+prevModal.addEventListener("click", () => {
+  swiperProduct.slidePrev();
+});
+nextModal.addEventListener("click", () => {
+  swiperProduct.slideNext();
+});
+
+// ## Action thumb product
+modalToggler.forEach((item) => item.addEventListener("click", handleZoomImage));
 function handleZoomImage(event) {
-  let image = event.target.parentElement.getAttribute("data-modal-toggler");
-  index = [...imgLightbox].findIndex(
-    (item) => item.getAttribute("data-modal-toggler") === image
+  // ## show slide initial
+  lenis.stop();
+  swiperProduct.init();
+  let image = event.target.getAttribute("key-items");
+  index = [...modalToggler].findIndex(
+    (item) => item.getAttribute("key-items") === image
   );
   swiperProduct.slideTo(index + 1, 0);
-  // #
-  const swiperModalProduct = new Swiper("[data-modal-swiper]", {
-    speed: 1000,
-    fadeEffect: { crossFade: true },
-    effect: "fade",
-    slidesPerView: 1,
-    allowTouchMove: false,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    autoplay: {
-      delay: 4000,
-      disableOnInteraction: false,
-    },
-    watchSlidesProgress: true,
-    observer: true,
-  })
-  $("[data-modal]").fadeIn(500);
+  // ## Init all swiper inside modal
+  const buildSwiperSlider = (sliderElm) => {
+    const sliderIdentifier = sliderElm.dataset.modalSwiper;
+    return new Swiper(`[data-modal-swiper="${sliderIdentifier}"]`, {
+      speed: 1000,
+      fadeEffect: { crossFade: true },
+      effect: "fade",
+      slidesPerView: 1,
+      initialSlide: 0,
+      allowTouchMove: false,
+      pagination: {
+        el: `.swiper-pagination-m${sliderIdentifier}`,
+        clickable: true,
+      },
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      watchSlidesProgress: true,
+      observer: true,
+      observeParents: true,
+    });
+  };
+  // Get all of the swipers on the page
+  const allSliders = document.querySelectorAll("[data-modal-swiper]");
+  // Loop over all of the fetched sliders and apply Swiper on each one.
+  allSliders.forEach((slider) => buildSwiperSlider(slider));
+
+  // ## Fade in modal
+  $("[data-modal]").fadeIn(800);
 }
 
+// ## Close modal
 $("[data-modal-close]").each(function () {
   $(this).on("click", function () {
     $("[data-modal]").fadeOut(500);
+    lenis.start();
   });
 });
 
