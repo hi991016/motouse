@@ -217,8 +217,8 @@ let index = 0;
 let swiperProduct;
 const [modalToggler, nextModal, prevModal] = [
   document.querySelectorAll("[data-modal-toggler]"),
-  document.querySelector(".c-modal_controls .modal-button-next"),
-  document.querySelector(".c-modal_controls .modal-button-prev"),
+  document.querySelector(".modal-button-next"),
+  document.querySelector(".modal-button-prev"),
 ];
 
 const swiperImages = () => {
@@ -241,12 +241,12 @@ const swiperImages = () => {
 swiperImages();
 
 // ## Controls modal
-prevModal.addEventListener("click", () => {
-  swiperProduct.slidePrev();
-});
-nextModal.addEventListener("click", () => {
-  swiperProduct.slideNext();
-});
+// prevModal.addEventListener("click", () => {
+//   swiperProduct.slidePrev();
+// });
+// nextModal.addEventListener("click", () => {
+//   swiperProduct.slideNext();
+// });
 
 // ## Action thumb product
 modalToggler.forEach((item) => item.addEventListener("click", handleZoomImage));
@@ -258,7 +258,8 @@ function handleZoomImage(event) {
   index = [...modalToggler].findIndex(
     (item) => item.getAttribute("key-items") === image
   );
-  swiperProduct.slideTo(index + 1, 0);
+  console.log("index", image, index);
+  swiperProduct.slideToLoop(index, 0);
   // ## Init all swiper inside modal
   const buildSwiperSlider = (sliderElm) => {
     const sliderIdentifier = sliderElm.dataset.modalSwiper;
