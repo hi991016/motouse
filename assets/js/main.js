@@ -301,13 +301,13 @@ function handleZoomImage(event) {
   allSliders.forEach((slider) => buildSwiperSlider(slider));
 
   // ## Fade in modal
-  $("[data-modal]").fadeIn(500);
+  $("[data-modal]").fadeIn(1000);
 }
 
 // ## Close modal
 $("[data-modal-close]").each(function () {
   $(this).on("click", function () {
-    $("[data-modal]").fadeOut(500);
+    $("[data-modal]").fadeOut(1000);
     document.body.classList.remove("--disable-scroll");
   });
 });
