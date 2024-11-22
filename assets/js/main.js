@@ -50,6 +50,12 @@ const appHeight = () => {
     "--app-height",
     `${document.documentElement.clientHeight}px`
   );
+  // 
+  const windowHeight = Math.max(
+    document.documentElement.clientHeight,
+    window.innerHeight || 0
+  );
+  document.querySelector("[data-modal]").style.height = windowHeight + "px";
 };
 window.addEventListener("resize", appHeight);
 
@@ -217,8 +223,8 @@ let index = 0;
 let swiperProduct;
 const [modalToggler, nextModal, prevModal] = [
   document.querySelectorAll("[data-modal-toggler]"),
-  document.querySelector(".custom-btn-next"),
-  document.querySelector(".custom-btn-prev"),
+  document.querySelectorAll(".custom-btn-next"),
+  document.querySelectorAll(".custom-btn-prev"),
 ];
 
 const swiperImages = () => {
@@ -241,12 +247,16 @@ const swiperImages = () => {
 swiperImages();
 
 // ## Controls modal
-prevModal.addEventListener("click", () => {
-  swiperProduct.slideNext();
-});
-nextModal.addEventListener("click", () => {
-  swiperProduct.slidePrev();
-});
+// prevModal.forEach((item) =>
+//   item.addEventListener("click", () => {
+//     swiperProduct.slideNext();
+//   })
+// );
+// nextModal.forEach((item) =>
+//   item.addEventListener("click", () => {
+//     swiperProduct.slideNext();
+//   })
+// );
 
 // ## build Swiper All
 const buildSwiperSlider = (sliderElm) => {
@@ -276,7 +286,8 @@ const buildSwiperSlider = (sliderElm) => {
 modalToggler.forEach((item) => item.addEventListener("click", handleZoomImage));
 function handleZoomImage(event) {
   // ## show slide initial
-  lenis.stop();
+  // lenis.stop();
+  document.body.classList.add("--disable-scroll");
   swiperProduct.init();
   let image = event.target.getAttribute("key-items");
   index = [...modalToggler].findIndex(
@@ -290,16 +301,21 @@ function handleZoomImage(event) {
   allSliders.forEach((slider) => buildSwiperSlider(slider));
 
   // ## Fade in modal
-  $("[data-modal]").fadeIn(800);
+  $("[data-modal]").fadeIn(500);
 }
 
 // ## Close modal
 $("[data-modal-close]").each(function () {
   $(this).on("click", function () {
     $("[data-modal]").fadeOut(500);
-    lenis.start();
+    document.body.classList.remove("--disable-scroll");
   });
 });
+
+// ===== button animation =====
+// $(".detail_btn").on("click", function () {
+//   $(this).addClass("active");
+// })
 
 // ===== lazy loading =====
 const ll = new LazyLoad({
