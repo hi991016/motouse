@@ -6,7 +6,7 @@ const init = () => {
   // # app-height
   appHeight();
   // # init video
-  initVideo();
+  // initVideo();
   // # init loading
   initLoading();
   // # init swiper feature
@@ -75,7 +75,9 @@ const initLoading = function () {
   setTimeout(() => {
     loadingLogo.classList.add("is-fade");
     setTimeout(() => {
-      $("#js-play").get(0).play();
+      // $("#js-play").get(0).play();
+      $(".js-play").get(0).play();
+      $(".js-play").get(1).play();
     }, 1000);
   }, 1000);
   // ##
