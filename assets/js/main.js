@@ -246,7 +246,7 @@ $("[data-modal]").on("click", function (event) {
         clickable: true,
         renderBullet: function (index, className) {
           return (
-            '<div class="' + className + '"><span class="test"></span></div>'
+            '<div class="' + className + '"><span class="action"></span></div>'
           );
         },
       },
